@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wix Embed Simulator - Instituto Martino</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f3f8;
+            color: #1e293b;
+        }
+
+        .wix-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .wix-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #1e3a8a;
+            text-decoration: none;
+        }
+
+        .wix-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .wix-nav a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .wix-nav a:hover {
+            color: #1e3a8a;
+        }
+
+        .simulation-banner {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            text-align: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .wix-page-content {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .wix-section-heading {
+            max-width: 1200px;
+            margin: 3rem auto 1rem auto;
+            padding: 0 5%;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .wix-section-desc {
+            max-width: 1200px;
+            margin: 0 auto 3rem auto;
+            padding: 0 5%;
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Iframe Container simulating Wix Iframe HTML component */
+        .iframe-container {
+            width: 100%;
+            border: none;
+            background-color: #070b19;
+            margin-bottom: 4rem;
+        }
+
+        .iframe-element {
+            width: 100%;
+            height: 2500px; /* Fixed height simulating Wix custom sizing */
+            border: none;
+            display: block;
+        }
+
+        .wix-footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 5%;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* Responsive controls to test mobile preview of the iframe */
+        .device-selector {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .device-btn {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            transition: all 0.2s;
+        }
+
+        .device-btn.active {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border-color: #1e3a8a;
+        }
+
+        /* Responsive iframe wrappers */
+        .preview-wrapper {
+            transition: width 0.4s ease;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .preview-desktop {
+            width: 100%;
+        }
+
+        .preview-tablet {
+            width: 768px;
+        }
+
+        .preview-mobile {
+            width: 375px;
+        }
+
+        .preview-mobile .iframe-element {
+            height: 4800px; /* Adjusted height for stacked mobile content */
+        }
+        
+        .preview-tablet .iframe-element {
+            height: 3500px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="simulation-banner">
+        SIMULACIÓN: Así es como se verá la landing page embebida como iframe dentro del sitio principal de Wix
+    </div>
+
+    <header class="wix-header">
+        <a href="#" class="wix-logo">Instituto Martino</a>
+        <nav class="wix-nav">
+            <a href="#">Inicio</a>
+            <a href="#">Profesionales</a>
+            <a href="#">Especialidades</a>
+            <a href="#" style="color: #1e3a8a; font-weight: 750;">Equipamiento</a>
+            <a href="#">Contacto</a>
+        </nav>
+    </header>
+
+    <div class="device-selector">
+        <button class="device-btn active" onclick="setDevice('desktop', this)">Vista Escritorio (100%)</button>
+        <button class="device-btn" onclick="setDevice('tablet', this)">Vista Tablet (768px)</button>
+        <button class="device-btn" onclick="setDevice('mobile', this)">Vista Móvil (375px)</button>
+    </div>
+
+    <main class="wix-page-content">
+        <h2 class="wix-section-heading">Nuestra Tecnología</h2>
+        <p class="wix-section-desc">
+            En el Instituto Martino, estamos comprometidos con ofrecer tratamientos seguros y diagnósticos rápidos. Debajo se encuentra la sección de equipamiento embebida de forma transparente.
+        </p>
+
+        <!-- Simulating the Wix HTML Iframe element -->
+        <div id="previewWrapper" class="preview-wrapper preview-desktop iframe-container">
+            <iframe src="index.html" class="iframe-element" title="Landing Page Equipamiento"></iframe>
+        </div>
+    </main>
+
+    <footer class="wix-footer">
+        © 2026 Instituto Martino de la Visión - Todos los derechos reservados.
+    </footer>
+
+    <script>
+        function setDevice(device, button) {
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.device-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Change preview container class
+            const wrapper = document.getElementById('previewWrapper');
+            wrapper.className = 'preview-wrapper iframe-container';
+            
+            if (device === 'desktop') {
+                wrapper.classList.add('preview-desktop');
+            } else if (device === 'tablet') {
+                wrapper.classList.add('preview-tablet');
+            } else if (device === 'mobile') {
+                wrapper.classList.add('preview-mobile');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,994 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   SISTEMA DE DISEÑO & TOKENS DE ESTILOS (LUMINOSO & MÉDICO PREMIUM)
+   ========================================================================== */
+:root {
+    /* Paleta de Colores Luminosos (Estilo Apple Health / Clínica Premium) */
+    --color-bg-light: #f8fafc;         /* Gris Claro Sedoso */
+    --color-bg-white: #ffffff;         /* Blanco Puro */
+    
+    --color-primary: #142B66;         /* Azul Institucional Martino (Deep Blue) */
+    --color-primary-light: #1f3d8a;
+    --color-primary-rgb: 20, 43, 102;
+    
+    --color-secondary: #3370A4;       /* Azul Intermedio */
+    --color-secondary-hover: #26557c;
+    --color-secondary-rgb: 51, 112, 164;
+    
+    --color-accent: #4682B4;          /* Azul Acero Celeste */
+    --color-accent-light: #e6f0fa;     /* Celeste Suave de Contraste */
+    --color-accent-blue-rgb: 70, 130, 180;
+    
+    /* Colores de Textos */
+    --color-text-dark: #334155;        /* Gris Pizarra Profundo */
+    --color-text-muted: #64748b;       /* Gris Muted */
+    --color-text-muted-light: #94a3b8; /* Gris Muted Claro */
+    --color-white: #ffffff;
+    
+    /* Botones & CTA */
+    --color-whatsapp: #10b981;        /* Verde Esmeralda Médico */
+    --color-whatsapp-hover: #059669;
+    --color-border: #e2e8f0;           /* Borde Fino Gris */
+    
+    /* Tipografía */
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Bordes y Sombras */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+    
+    /* Sombras Sutiles y Delicadas (Apple Style) */
+    --shadow-sm: 0 2px 8px rgba(20, 43, 102, 0.02);
+    --shadow-md: 0 10px 30px rgba(20, 43, 102, 0.04);
+    --shadow-lg: 0 20px 40px rgba(20, 43, 102, 0.06);
+    --shadow-premium: 0 30px 60px rgba(20, 43, 102, 0.08);
+    --shadow-glow: 0 0 20px rgba(51, 112, 164, 0.15);
+    
+    /* Transiciones */
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.25s ease;
+}
+
+/* ==========================================================================
+   RESET & CONFIGURACIÓN GLOBAL
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Tipografía Consistente */
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--color-primary);
+}
+
+p {
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--color-text-muted);
+}
+
+/* Botones Premium */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+    color: var(--color-white);
+    box-shadow: 0 10px 25px -5px rgba(20, 43, 102, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba(20, 43, 102, 0.35), var(--shadow-glow);
+}
+
+.btn-secondary {
+    background: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+    background: var(--color-bg-light);
+    border-color: rgba(20, 43, 102, 0.2);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-whatsapp {
+    background: linear-gradient(135deg, var(--color-whatsapp), #059669);
+    color: var(--color-white);
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+.btn-whatsapp svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* ==========================================================================
+   1. HERO SECTION (LUMINOSA Y SOFISTICADA)
+   ========================================================================== */
+.hero {
+    position: relative;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 5% 6rem 5%;
+    background-color: var(--color-primary);
+    /* Overlay azul institucional sofisticado sobre imagen médica real */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(51, 112, 164, 0.9) 0%, rgba(20, 43, 102, 0.92) 80%),
+        url('../images/hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to top, var(--color-bg-white), transparent);
+    pointer-events: none;
+}
+
+.hero-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+}
+
+.hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--color-white);
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: var(--radius-full);
+    margin-bottom: 2rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent-light);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-white);
+}
+
+.hero-title {
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-white);
+    max-width: 950px;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.hero-title span {
+    color: var(--color-accent-light);
+    background: linear-gradient(135deg, var(--color-white) 40%, var(--color-accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 750px;
+    margin-bottom: 3rem;
+    line-height: 1.65;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+/* Sobrescribir botones dentro de Hero para legibilidad en fondo oscuro */
+.hero .btn-primary {
+    background: var(--color-white);
+    color: var(--color-primary);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+.hero .btn-primary:hover {
+    background: var(--color-accent-light);
+    color: var(--color-primary-light);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.25);
+}
+
+.hero .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: none;
+}
+
+.hero .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--color-white);
+}
+
+/* ==========================================================================
+   2. ESTADÍSTICAS & PILARES PREMIUM (APPLE HEALTH STYLE)
+   ========================================================================== */
+.stats {
+    padding: 2rem 5% 5rem 5%;
+    position: relative;
+    z-index: 3;
+    background-color: var(--color-bg-white);
+}
+
+.stats-container {
+    max-width: 1200px;
+    margin: -4rem auto 0 auto; /* Solape elegante */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+}
+
+.stat-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 2.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(51, 112, 164, 0.3);
+    box-shadow: var(--shadow-premium);
+}
+
+.stat-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    background: var(--color-accent-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    color: var(--color-primary);
+    border: 1px solid rgba(51, 112, 164, 0.1);
+    transition: var(--transition-smooth);
+}
+
+.stat-card:hover .stat-icon-wrapper {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--color-primary);
+}
+
+.stat-icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+.stat-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1.35;
+}
+
+/* ==========================================================================
+   3. SECCIÓN NUESTRO EQUIPAMIENTO (CARDS BLANCAS PREMIUM)
+   ========================================================================== */
+.equipment-section {
+    padding: 6rem 5%;
+    background-color: var(--color-bg-light);
+    position: relative;
+}
+
+.section-header {
+    max-width: 800px;
+    margin: 0 auto 5rem auto;
+    text-align: center;
+}
+
+.section-badge {
+    color: var(--color-secondary);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 1.25rem;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-weight: 350;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.equipment-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-sm);
+}
+
+.equipment-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(51, 112, 164, 0.25);
+    box-shadow: var(--shadow-premium);
+}
+
+.equipment-image-container {
+    position: relative;
+    aspect-ratio: 16/11;
+    overflow: hidden;
+    background-color: var(--color-bg-light);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.equipment-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.equipment-card:hover .equipment-image {
+    transform: scale(1.05);
+}
+
+.equipment-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.equipment-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--color-primary);
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full);
+}
+
+.equipment-info {
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}
+
+.equipment-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    transition: var(--transition-fast);
+}
+
+.equipment-card:hover .equipment-name {
+    color: var(--color-secondary);
+}
+
+.equipment-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-weight: 350;
+    flex-grow: 1;
+}
+
+.equipment-footer {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.equipment-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition-fast);
+    padding: 4px 0;
+}
+
+.equipment-action svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    fill: none;
+}
+
+.equipment-card:hover .equipment-action {
+    color: var(--color-secondary);
+}
+
+.equipment-card:hover .equipment-action svg {
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   4. SECCIÓN TECNOLOGÍA PARA CIRUGÍAS (CLÍNICA LUMINOSA)
+   ========================================================================== */
+.surgery-section {
+    padding: 7rem 5%;
+    background-color: var(--color-bg-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.surgery-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.surgery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.surgery-content {
+    flex: 1.1;
+}
+
+.surgery-title {
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+}
+
+.surgery-desc {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    font-weight: 350;
+}
+
+.surgery-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.surgery-feature-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.surgery-feature-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.surgery-feature-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(51, 112, 164, 0.4);
+}
+
+.surgery-feature-text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 350;
+    line-height: 1.55;
+}
+
+.surgery-image-container {
+    flex: 0.9;
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+    aspect-ratio: 4/3;
+}
+
+.surgery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 8s ease;
+}
+
+.surgery-image-container:hover .surgery-image {
+    transform: scale(1.04);
+}
+
+.surgery-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   5. EXPERIENCIA VISUAL (BANDA INTERACTIVA)
+   ========================================================================== */
+.experience-section {
+    padding: 3.5rem 0;
+    background-color: var(--color-bg-light);
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.slider-wrapper {
+    display: flex;
+    width: max-content;
+    animation: marquee 45s linear infinite;
+    gap: 1.5rem;
+}
+
+.slider-wrapper:hover {
+    animation-play-state: paused;
+}
+
+.slider-card {
+    width: 320px;
+    height: 200px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+    background-color: var(--color-white);
+}
+
+.slider-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slider-card:hover img {
+    transform: scale(1.06);
+}
+
+.slider-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 60%, transparent 100%);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.slider-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 2px;
+}
+
+.slider-card-desc {
+    font-size: 0.75rem;
+    color: var(--color-secondary);
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 0.75rem)); }
+}
+
+/* ==========================================================================
+   6. CTA FINAL (ELEGANCIA MÉDICA LUMINOSA)
+   ========================================================================== */
+.cta-section {
+    padding: 7rem 5% 8rem 5%;
+    background-color: var(--color-bg-white);
+    position: relative;
+}
+
+.cta-container {
+    max-width: 950px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--color-accent-light) 0%, #f0f7ff 100%);
+    border: 1px solid rgba(51, 112, 164, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.cta-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.cta-title {
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 1.25rem;
+}
+
+.cta-subtitle {
+    font-size: 1.15rem;
+    color: var(--color-text-dark);
+    max-width: 650px;
+    margin: 0 auto 3rem auto;
+    font-weight: 350;
+    line-height: 1.7;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-note {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 2rem;
+    font-weight: 350;
+}
+
+/* ==========================================================================
+   WIX EMBED & PIE DE PÁGINA
+   ========================================================================== */
+.embed-helper-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5%;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-bg-light);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+    position: fixed;
+    width: 56px;
+    height: 56px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #10b981;
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25), 0 0 15px rgba(16, 185, 129, 0.1);
+    z-index: 999;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-5px) scale(1.05);
+    background-color: #059669;
+    box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4), 0 0 25px rgba(16, 185, 129, 0.2);
+}
+
+.whatsapp-float svg {
+    width: 26px;
+    height: 26px;
+    fill: currentColor;
+}
+
+/* ==========================================================================
+   ANIMACIONES KEYFRAMES
+   ========================================================================== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE-FIRST & TABLET)
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .stats-container {
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: -3rem;
+        gap: 1rem;
+    }
+    .equipment-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    .surgery-container {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 1rem;
+    }
+    .surgery-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 3.5rem;
+    }
+    .surgery-content {
+        order: 2;
+    }
+    .surgery-image-container {
+        order: 1;
+        width: 100%;
+        max-width: 500px;
+    }
+    .surgery-features {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+    
+    .hero {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        min-height: auto;
+    }
+    
+    .stats {
+        padding-bottom: 4rem;
+    }
+    
+    .stats-container {
+        margin-top: -2.5rem;
+        gap: 0.75rem;
+    }
+    
+    .stat-card {
+        padding: 1.75rem 1rem;
+    }
+    
+    .equipment-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 480px;
+    }
+    
+    .cta-container {
+        padding: 4rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+    
+    .hero-actions .btn {
+        width: 100%;
+    }
+    
+    .cta-container {
+        padding: 3rem 1.25rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .whatsapp-float {
+        width: 48px;
+        height: 48px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .whatsapp-float svg {
+        width: 22px;
+        height: 22px;
+    }
+}
